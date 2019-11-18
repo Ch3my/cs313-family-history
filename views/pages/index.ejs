@@ -2,25 +2,71 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css"
     integrity="sha256-a2tobsqlbgLsWs7ZVUGgP5IvWZsx8bTNQpzsqCSm5mk=" crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <div class="container">
     <h1 class="animated jackInTheBox">Postal</h1>
-    <form action="/calculateRate" method="POST">
+    <form id="form">
         <div class="row">
             <div class="col">
-                <label for="">Type of Mail</label>
-                <select name="mailType" id="mailType" class="form-control">
-                    <option value="LS">Letters (Stamped)</option>
-                    <option value="LM">Letters (Metered)</option>
-                    <option value="LE">Large Envelopes (Flats)</option>
-                    <option value="FC">First-Class Package Service -- Retail</option>
-                </select>
-            </div>
-            <div class="col">
-                <label for="">Weight</label>
-                <input type="text" class="form-control" name="weight">
+                <label for="">Person Id</label>
+                <input type="text" class="form-control" name="personId" id="personId">
             </div>
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <div class="row">
+        <div class="col">
+            <p>Person</p>
+            <p id="personData"></p>
+        </div>
+        <div class="col">
+            <p>Parents</p>
+            <p id="parentsData"></p>
+        </div>
+        <div class="col">
+            <p>Children</p>
+            <p id="childrenData"></p>
+        </div>
+    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#form").on('submit', function (e) {
+            e.preventDefault();
+            $('#personData').empty()
+            $('#parentsData').empty()
+            $('#childrenData').empty()
+            // Person data
+            $.get('/getPerson?id=' + $('#personId').val()).done((data) => {
+                var html = '<span>Name: ' + data[0].firstName + '</span><br>'
+                html += '<span>Last Name: ' + data[0].lastName + '</span><br>'
+                html += '<span>Birth: ' + data[0].dateOfBirth.substring(0, 10) + '</span>'
+                $('#personData').append(html)
+            })
+            // Parents data
+            $.get('/getParents?id=' + $('#personId').val()).done((data) => {
+                var html2 = ''
+                for (let i = 0; i < data.length; i++) {
+                    html2 += '<span>Name: ' + data[i].firstName + '</span><br>'
+                    html2 += '<span>Last Name: ' + data[i].lastName + '</span><br>'
+                    html2 += '<span>Birth: ' + data[i].dateOfBirth.substring(0, 10) + '</span><br>'
+                }
+                $('#parentsData').append(html2)
+            })
+            // children data
+            $.get('/getChildren?id=' + $('#personId').val()).done((data) => {
+                var html3 = ''
+                for (let i = 0; i < data.length; i++) {
+                    html3 += '<span>Name: ' + data[i].firstName + '</span><br>'
+                    html3 += '<span>Last Name: ' + data[i].lastName + '</span><br>'
+                    html3 += '<span>Birth: ' + data[i].dateOfBirth.substring(0, 10) + '</span><br>'
+                }
+                $('#childrenData').append(html3)
+            })
+        });
+    });
+</script>
