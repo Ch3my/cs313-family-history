@@ -1,0 +1,26 @@
+{
+  "name": "c313-postalrate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ch3my/c313-postalRate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ch3my/c313-postalRate/issues"
+  },
+  "homepage": "https://github.com/Ch3my/c313-postalRate#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}

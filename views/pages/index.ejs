@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css"
+    integrity="sha256-a2tobsqlbgLsWs7ZVUGgP5IvWZsx8bTNQpzsqCSm5mk=" crossorigin="anonymous" />
+<div class="container">
+    <h1 class="animated jackInTheBox">Postal</h1>
+    <form action="/calculateRate" method="POST">
+        <div class="row">
+            <div class="col">
+                <label for="">Type of Mail</label>
+                <select name="mailType" id="mailType" class="form-control">
+                    <option value="LS">Letters (Stamped)</option>
+                    <option value="LM">Letters (Metered)</option>
+                    <option value="LE">Large Envelopes (Flats)</option>
+                    <option value="FC">First-Class Package Service -- Retail</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="">Weight</label>
+                <input type="text" class="form-control" name="weight">
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
